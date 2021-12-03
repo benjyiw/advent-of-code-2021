@@ -50,7 +50,7 @@ func calcIncreases(depths []int) int {
 }
 
 func main() {
-	inputFile := flag.String("i", "inputs/example.txt", "input filepath")
+	inputFile := flag.String("i", "inputs/input.txt", "input filepath")
 	part := flag.Int("p", 1, "specify which part to execution [1,2]")
 	flag.Parse()
 

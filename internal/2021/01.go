@@ -2,10 +2,9 @@ package y2021
 
 import (
 	"errors"
-	"fmt"
 	"strconv"
 
-	"github.com/benjyiw/aoc/internal/files"
+	"github.com/benjyiw/aoc/internal/utils"
 )
 
 func convertStringSpliceToInt(lines []string) []int {
@@ -49,24 +48,24 @@ func calcIncreases(depths []int) int {
 	return totalIncreases
 }
 
-func Run01(inputFile string, part int) error {
+func Run01(inputFile string, part int) (output int, err error) {
 	if inputFile == "" {
 		inputFile = "./internal/2021/inputs/01/example.txt"
 	}
-
-	lines, err := files.ReadFile(inputFile)
+	lines, err := utils.ReadFile(inputFile)
 	if err != nil {
-		return err
+		return
 	}
 
 	depths := convertStringSpliceToInt(lines)
-	if part == 1 {
-		fmt.Printf("total increases: %d\n", calcIncreases(depths))
-	} else if part == 2 {
+	switch part {
+	case 1:
+		output = calcIncreases(depths)
+	case 2:
 		part2Depths := calcPart2Ints(depths)
-		fmt.Printf("total increases: %d\n", calcIncreases(part2Depths))
-	} else {
-		return errors.New("invalid part specified")
+		output = calcIncreases(part2Depths)
+	default:
+		err = errors.New("invalid part specified")
 	}
-	return nil
+	return
 }

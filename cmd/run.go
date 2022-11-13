@@ -24,22 +24,30 @@ var runCmd = &cobra.Command{
 		day = args[0]
 
 		if verboseMode {
-			fmt.Printf("executing %s %s\n\n", year, day)
+			fmt.Printf("Executing year %s day %s part %d\n\n", year, day, part)
 		}
+
+		var output int
+		var err error
 
 		switch year {
 		case "2021":
 			switch day {
 			case "01":
-				y21.Run01(input, part)
+				output, err = y21.Run01(input, part)
 			case "02":
-				y21.Run02(input, part)
+				output, err = y21.Run02(input, part)
 			default:
-				return errors.New("unimplemented day")
+				err = errors.New("unimplemented day")
 			}
 		default:
-			return errors.New("unimplemented year")
+			err = errors.New("unimplemented year")
 		}
+		if err != nil {
+			return err
+		}
+
+		fmt.Printf("output: %d\n", output)
 
 		return nil
 	},

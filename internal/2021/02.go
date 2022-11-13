@@ -2,11 +2,10 @@ package y2021
 
 import (
 	"errors"
-	"fmt"
 	"strconv"
 	"strings"
 
-	"github.com/benjyiw/aoc/internal/files"
+	"github.com/benjyiw/aoc/internal/utils"
 )
 
 func calcPart1Depth(lines []string) (int, int) {
@@ -58,13 +57,13 @@ func calcPart2Depth(lines []string) (int, int) {
 	return depth, horizontal
 }
 
-func Run02(inputFile string, part int) error {
+func Run02(inputFile string, part int) (output int, err error) {
 	if inputFile == "" {
 		inputFile = "./internal/2021/inputs/02/example.txt"
 	}
-	lines, err := files.ReadFile(inputFile)
+	lines, err := utils.ReadFile(inputFile)
 	if err != nil {
-		return err
+		return
 	}
 
 	var depth, horizontal int
@@ -74,9 +73,10 @@ func Run02(inputFile string, part int) error {
 	case 2:
 		depth, horizontal = calcPart2Depth(lines)
 	default:
-		return errors.New("invalid part specified")
+		err = errors.New("invalid part specified")
+		return
 	}
 
-	fmt.Println(depth * horizontal)
-	return nil
+	output = depth * horizontal
+	return
 }

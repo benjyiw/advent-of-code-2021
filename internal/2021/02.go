@@ -1,32 +1,13 @@
-package main
+package y2021
 
 import (
-	"bufio"
-	"flag"
+	"errors"
 	"fmt"
-	"os"
-	"strings"
 	"strconv"
+	"strings"
+
+	"github.com/benjyiw/aoc/internal/files"
 )
-
-func readFile(filePath string) []string {
-	file, err := os.Open(filePath)
-	if err != nil {
-		panic(err) // don't care, just panic
-	}
-	defer file.Close()
-
-	var lines []string
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-
-	if err := scanner.Err(); err != nil {
-		panic(err)
-	}
-	return lines
-}
 
 func calcPart1Depth(lines []string) (int, int) {
 	var depth, horizontal int
@@ -77,23 +58,25 @@ func calcPart2Depth(lines []string) (int, int) {
 	return depth, horizontal
 }
 
-func main() {
-	inputFile := flag.String("i", "inputs/input.txt", "input filepath")
-	part := flag.Int("p", 1, "specify which part to execution [1,2]")
-	flag.Parse()
-
-	lines := readFile(*inputFile)
+func Run02(inputFile string, part int) error {
+	if inputFile == "" {
+		inputFile = "./internal/2021/inputs/02/example.txt"
+	}
+	lines, err := files.ReadFile(inputFile)
+	if err != nil {
+		return err
+	}
 
 	var depth, horizontal int
-	switch *part {
+	switch part {
 	case 1:
 		depth, horizontal = calcPart1Depth(lines)
 	case 2:
 		depth, horizontal = calcPart2Depth(lines)
 	default:
-		fmt.Println("invalid part specified")
-		os.Exit(1)
+		return errors.New("invalid part specified")
 	}
 
-	fmt.Println(depth*horizontal)
+	fmt.Println(depth * horizontal)
+	return nil
 }

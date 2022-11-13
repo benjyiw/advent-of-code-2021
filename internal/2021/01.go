@@ -50,7 +50,7 @@ func calcIncreases(depths []int) int {
 
 func Run01(inputFile string, part int) (output int, err error) {
 	if inputFile == "" {
-		inputFile = "./internal/2021/inputs/01/example.txt"
+		inputFile = getExampleInput("01")
 	}
 	lines, err := utils.ReadFile(inputFile)
 	if err != nil {

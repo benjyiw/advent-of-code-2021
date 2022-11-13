@@ -59,7 +59,7 @@ func calcPart2Depth(lines []string) (int, int) {
 
 func Run02(inputFile string, part int) (output int, err error) {
 	if inputFile == "" {
-		inputFile = "./internal/2021/inputs/02/example.txt"
+		inputFile = getExampleInput("02")
 	}
 	lines, err := utils.ReadFile(inputFile)
 	if err != nil {

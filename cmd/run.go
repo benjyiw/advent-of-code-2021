@@ -23,7 +23,7 @@ var runCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		day = args[0]
 
-		if !verboseMode {
+		if verboseMode {
 			fmt.Printf("executing %s %s\n\n", year, day)
 		}
 

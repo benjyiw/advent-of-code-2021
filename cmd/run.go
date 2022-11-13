@@ -37,6 +37,8 @@ var runCmd = &cobra.Command{
 				output, err = y21.Run01(input, part)
 			case "02":
 				output, err = y21.Run02(input, part)
+			case "03":
+				output, err = y21.Run03(input, part)
 			default:
 				err = errors.New("unimplemented day")
 			}
